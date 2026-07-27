@@ -24,7 +24,7 @@ mongoose
 //Middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   }),
 );
@@ -38,7 +38,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/books", bookRouter);
 app.use("/api/members", memberRouter);
 app.use("/api/borrows", borrowRouter);
-//Error Handler
 
 //Listener
 const PORT = process.env.PORT || 5000;
