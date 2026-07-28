@@ -66,7 +66,7 @@ export default function ViewMemberModal({
                     key={b._id}
                     className="rounded-lg border border-[#35606B] bg-[#12343B] px-3 py-2"
                   >
-                    {b.title}
+                    {b.book.title}
                   </li>
                 ))}
               </ul>
