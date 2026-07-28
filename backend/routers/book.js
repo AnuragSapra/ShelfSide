@@ -34,7 +34,7 @@ router.patch(
 );
 
 //DELETE
-router.delete(
+router.patch(
   "/:id/deactivate",
   ensureAuthenticated,
   onlyGrantAccessTo("admin"),
