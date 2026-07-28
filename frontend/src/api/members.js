@@ -4,6 +4,10 @@ export function getAllMembers(params) {
   return api.get("/members", { params });
 }
 
+export function getMemberById(memberId) {
+  return api.get(`/members/${memberId}`);
+}
+
 export function handleCreateMember(memberData) {
   return api.post("/members", memberData);
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllMembersBorrows } from "../api/borrows";
+import { getMemberById } from "../api/members";
 import toast from "react-hot-toast";
 import { Eye } from "lucide-react";
 import Button from "./Button";
@@ -44,6 +45,15 @@ export default function PastRequestsTable() {
       toast.error("Failed to load past requests.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleViewMember(memberId) {
+    try {
+      const response = await getMemberById(memberId);
+      setSelectedMember(response.data.member);
+    } catch (error) {
+      toast.error("Failed to load member details.");
     }
   }
 
@@ -145,7 +155,7 @@ export default function PastRequestsTable() {
 
                         <td className="py-4 px-4 w-1">
                           <Button
-                            onClick={() => setSelectedMember(b.user)}
+                            onClick={() => handleViewMember(b.user.memberId)}
                             className="border border-[#C89666] text-[#E1B382] hover:bg-[#C89666]/20 rounded-lg px-4 py-2 whitespace-nowrap"
                           >
                             <Eye size={18} />
