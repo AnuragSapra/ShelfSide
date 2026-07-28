@@ -75,6 +75,7 @@ export async function getAllMembers(req, res) {
 
     const members = await User.find(filter)
       .select("-password")
+      .populate("currentBorrowedBooks", "title")
       .sort({ createdAt: -1 });
     return res.status(200).json({ members });
   } catch (error) {
@@ -92,9 +93,12 @@ export async function getMemberById(req, res) {
     });
   }
   try {
-    const member = await User.findOne({ memberId, role: "member" }).select(
-      "-password",
-    );
+    const member = await User.findOne({
+      memberId,
+      role: "member",
+    })
+      .select("-password")
+      .populate("currentBorrowedBooks", "title");
     if (!member) {
       return res.status(404).json({
         message: "No member found with this memberId",
